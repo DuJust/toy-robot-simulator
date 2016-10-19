@@ -19,40 +19,47 @@ module ToyRobotSimulator
     def move
       return unless on_table?
 
-      @position.y += 1 if @position.orientation == NORTH
-      @position.y -= 1 if @position.orientation == SOUTH
-      @position.x += 1 if @position.orientation == EAST
-      @position.x -= 1 if @position.orientation == WEST
+      next_position = case @position.orientation
+                        when NORTH
+                          Position.new(@position.x, @position.y + 1, @position.orientation)
+                        when SOUTH
+                          Position.new(@position.x, @position.y - 1, @position.orientation)
+                        when EAST
+                          Position.new(@position.x + 1, @position.y, @position.orientation)
+                        when WEST
+                          Position.new(@position.x - 1, @position.y, @position.orientation)
+                      end
+      @position     = next_position if next_position.on_table?
     end
 
     def left
       return unless on_table?
 
       @position.orientation = case @position.orientation
-                       when NORTH
-                         WEST
-                       when WEST
-                         SOUTH
-                       when SOUTH
-                         EAST
-                       when EAST
-                         NORTH
-                     end
+                                when NORTH
+                                  WEST
+                                when WEST
+                                  SOUTH
+                                when SOUTH
+                                  EAST
+                                when EAST
+                                  NORTH
+                              end
     end
 
     def right
       return unless on_table?
 
       @position.orientation = case @position.orientation
-                       when NORTH
-                         EAST
-                       when EAST
-                         SOUTH
-                       when SOUTH
-                         WEST
-                       when WEST
-                         NORTH
-                     end
+                                when NORTH
+                                  EAST
+                                when EAST
+                                  SOUTH
+                                when SOUTH
+                                  WEST
+                                when WEST
+                                  NORTH
+                              end
     end
 
     private

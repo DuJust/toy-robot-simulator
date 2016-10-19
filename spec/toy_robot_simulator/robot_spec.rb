@@ -55,6 +55,13 @@ module ToyRobotSimulator
       it 'should ignore the move command when robot is not on table' do
         expect(robot.move).to eq(nil)
       end
+
+      it 'should ignore the move command when next position is invalid' do
+        robot.place(0, 0, 'SOUTH')
+        robot.move
+
+        expect(robot.report).to eq('0,0,SOUTH')
+      end
     end
 
     describe '#left' do
