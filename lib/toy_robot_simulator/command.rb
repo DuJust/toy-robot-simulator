@@ -12,6 +12,14 @@ module ToyRobotSimulator
         when 'PLACE'
           x, y, orientation = command.last.split(',')
           @robot.place(x.to_i, y.to_i, orientation)
+        when 'MOVE'
+          @robot.move
+        when 'LEFT'
+          @robot.left
+        when 'RIGHT'
+          @robot.right
+        when 'REPORT'
+          puts @robot.report
       end
     end
   end
