@@ -14,10 +14,12 @@ Install Ruby and then execute:
 
 ## Usage
 
-1. Create a test file. I've create some fixtures for your.
-2. Execute with your file path: 
+1. Create a test file. I've create some fixtures for your in `spec/fixtures/` folder.
+2. Execute with given test data or your own file path:
 
 ```
+$ rake simulate[spec/fixtures/test1]
+
 $ rake simulate[filepath]
 ```
 
