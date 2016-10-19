@@ -47,7 +47,7 @@ module ToyRobotSimulator
 
       describe 'REPORT command' do
         it 'should print robot report' do
-          expect(robot).to receive(:report).and_return('robot report')
+          expect(robot).to receive(:report)
           command.run('REPORT')
         end
       end

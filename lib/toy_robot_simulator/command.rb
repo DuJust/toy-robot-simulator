@@ -19,7 +19,7 @@ module ToyRobotSimulator
         when 'RIGHT'
           @robot.right
         when 'REPORT'
-          puts @robot.report
+          @robot.report
       end
     end
 
