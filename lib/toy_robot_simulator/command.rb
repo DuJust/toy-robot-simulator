@@ -11,7 +11,7 @@ module ToyRobotSimulator
       case command.first
         when 'PLACE'
           x, y, orientation = command.last.split(',')
-          @robot.place(x.to_i, y.to_i, orientation)
+          @robot.place(x.to_i, y.to_i, orientation) if valid_integer?(x) && valid_integer?(y)
         when 'MOVE'
           @robot.move
         when 'LEFT'
@@ -21,6 +21,16 @@ module ToyRobotSimulator
         when 'REPORT'
           puts @robot.report
       end
+    end
+
+    private
+
+    def valid_integer?(integer_string)
+      Integer(integer_string)
+    rescue ArgumentError
+      false
+    else
+      true
     end
   end
 end
