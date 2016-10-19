@@ -6,6 +6,17 @@ module ToyRobotSimulator
       @robot = robot
     end
 
+    def read_from_io(io)
+      until io.eof?
+        begin
+          run(io.readline.strip)
+        rescue Exception => e
+          puts e.message
+          puts e.backtrace.inspect
+        end
+      end
+    end
+
     def run(command_string)
       command = command_string.split
       case command.first
