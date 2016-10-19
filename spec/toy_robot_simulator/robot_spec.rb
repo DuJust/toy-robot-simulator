@@ -11,6 +11,10 @@ module ToyRobotSimulator
 
         expect(robot.report).to eq('0,0,NORTH')
       end
+
+      it 'should ignore the report command when robot is not on table' do
+        expect(robot.report).to eq(nil)
+      end
     end
 
     describe '#move' do
@@ -40,6 +44,10 @@ module ToyRobotSimulator
         robot.move
 
         expect(robot.report).to eq('0,0,SOUTH')
+      end
+
+      it 'should ignore the move command when robot is not on table' do
+        expect(robot.move).to eq(nil)
       end
     end
 
@@ -71,6 +79,10 @@ module ToyRobotSimulator
 
         expect(robot.report).to eq('0,0,NORTH')
       end
+
+      it 'should ignore the left command when robot is not on table' do
+        expect(robot.left).to eq(nil)
+      end
     end
 
     describe '#right' do
@@ -100,6 +112,10 @@ module ToyRobotSimulator
         robot.right
 
         expect(robot.report).to eq('0,0,NORTH')
+      end
+
+      it 'should ignore the right command when robot is not on table' do
+        expect(robot.right).to eq(nil)
       end
     end
   end

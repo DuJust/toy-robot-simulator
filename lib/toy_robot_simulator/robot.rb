@@ -12,10 +12,12 @@ module ToyRobotSimulator
     end
 
     def report
-      [@x, @y, @orientation].join(',')
+      [@x, @y, @orientation].join(',') if on_table?
     end
 
     def move
+      return unless on_table?
+
       @y += 1 if @orientation == NORTH
       @y -= 1 if @orientation == SOUTH
       @x += 1 if @orientation == EAST
@@ -23,6 +25,8 @@ module ToyRobotSimulator
     end
 
     def left
+      return unless on_table?
+
       @orientation = case @orientation
                        when NORTH
                          WEST
@@ -36,6 +40,8 @@ module ToyRobotSimulator
     end
 
     def right
+      return unless on_table?
+
       @orientation = case @orientation
                        when NORTH
                          EAST
@@ -46,6 +52,12 @@ module ToyRobotSimulator
                        when WEST
                          NORTH
                      end
+    end
+
+    private
+
+    def on_table?
+      @x && @y && @orientation
     end
   end
 end
