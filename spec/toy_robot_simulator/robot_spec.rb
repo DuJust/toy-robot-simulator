@@ -21,5 +21,14 @@ module ToyRobotSimulator
         expect(robot.report).to eq('0,1,NORTH')
       end
     end
+
+    describe '#left' do
+      it 'should turn to west when facing north' do
+        robot.place(0, 0, 'NORTH')
+        robot.left
+
+        expect(robot.report).to eq('0,0,WEST')
+      end
+    end
   end
 end
