@@ -19,14 +19,14 @@ module ToyRobotSimulator
     def move
       return unless on_table?
 
-      next_position = case @position.orientation
-                        when NORTH
+      next_position = case
+                        when @position.north?
                           Position.new(@position.x, @position.y + 1, @position.orientation)
-                        when SOUTH
-                          Position.new(@position.x, @position.y - 1, @position.orientation)
-                        when EAST
+                        when @position.east?
                           Position.new(@position.x + 1, @position.y, @position.orientation)
-                        when WEST
+                        when @position.south?
+                          Position.new(@position.x, @position.y - 1, @position.orientation)
+                        when @position.west?
                           Position.new(@position.x - 1, @position.y, @position.orientation)
                       end
       @position     = next_position if next_position.on_table?
@@ -35,29 +35,29 @@ module ToyRobotSimulator
     def left
       return unless on_table?
 
-      @position.orientation = case @position.orientation
-                                when NORTH
+      @position.orientation = case
+                                when @position.north?
                                   WEST
-                                when WEST
-                                  SOUTH
-                                when SOUTH
-                                  EAST
-                                when EAST
+                                when @position.east?
                                   NORTH
+                                when @position.south?
+                                  EAST
+                                when @position.west?
+                                  SOUTH
                               end
     end
 
     def right
       return unless on_table?
 
-      @position.orientation = case @position.orientation
-                                when NORTH
+      @position.orientation = case
+                                when @position.north?
                                   EAST
-                                when EAST
+                                when @position.east?
                                   SOUTH
-                                when SOUTH
+                                when @position.south?
                                   WEST
-                                when WEST
+                                when @position.west?
                                   NORTH
                               end
     end

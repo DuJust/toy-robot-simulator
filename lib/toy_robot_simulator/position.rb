@@ -2,6 +2,11 @@ require 'toy_robot_simulator/robot'
 
 module ToyRobotSimulator
   class Position
+    NORTH = 'NORTH'
+    WEST  = 'WEST'
+    EAST  = 'EAST'
+    SOUTH = 'SOUTH'
+
     MIN_POSITION = 0
     MAX_POSITION = 5
 
@@ -23,6 +28,12 @@ module ToyRobotSimulator
           ToyRobotSimulator::Robot::SOUTH,
           ToyRobotSimulator::Robot::WEST
         ].include?(orientation)
+    end
+
+    [NORTH, EAST, SOUTH, WEST].each do |orientation|
+      define_method "#{orientation.downcase}?" do
+        @orientation == orientation
+      end
     end
   end
 end
