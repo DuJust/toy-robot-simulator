@@ -1,13 +1,3 @@
-require_relative 'toy_robot_simulator/robot'
+$LOAD_PATH << File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib'))
 
-class ToyRobotSimulator
-  def initialize(robot)
-    @robot = robot
-  end
-
-  def place(x, y, orientation)
-    @robot.x           = x
-    @robot.y           = y
-    @robot.orientation = orientation
-  end
-end
+Dir['../lib/**/*.rb'].each { |f| require f }
