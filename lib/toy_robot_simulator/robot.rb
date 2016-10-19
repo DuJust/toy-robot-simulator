@@ -1,5 +1,3 @@
-require 'toy_robot_simulator/position'
-
 module ToyRobotSimulator
   class Robot
     attr_reader :errors

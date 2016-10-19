@@ -1,5 +1,3 @@
-require 'toy_robot_simulator/robot'
-
 module ToyRobotSimulator
   class Command
     def initialize(robot = Robot.new)
