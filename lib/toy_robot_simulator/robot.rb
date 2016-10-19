@@ -2,6 +2,8 @@ require 'toy_robot_simulator/position'
 
 module ToyRobotSimulator
   class Robot
+    attr_reader :errors
+
     def place(x, y, orientation)
       position = Position.new(x, y, orientation)
       on_table(position) do
@@ -64,10 +66,17 @@ module ToyRobotSimulator
     private
 
     def on_table(position = @position)
-      if position && position.on_table?
+      @errors = []
+      unless position
+        @errors << 'Position is not on table.'
+        return false
+      end
+
+      if position.on_table?
         yield if block_given?
         true
       else
+        @errors += position.errors
         false
       end
     end

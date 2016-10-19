@@ -16,10 +16,12 @@ module ToyRobotSimulator
         allow_any_instance_of(Position).to receive(:on_table).and_return false
 
         expect(robot.place(-1, 0, 'NORTH')).to eq(false)
+        expect(robot.errors).not_to be_empty
       end
 
-      it 'should ignore the report command when robot is not on table' do
+      it 'should append the report command error when robot is not on table' do
         expect(robot.report).to eq(false)
+        expect(robot.errors).to include('Position is not on table.')
       end
     end
 
@@ -52,14 +54,16 @@ module ToyRobotSimulator
         expect { robot.report }.to output(/0,0,SOUTH/).to_stdout
       end
 
-      it 'should ignore the move command when robot is not on table' do
+      it 'should append the move command error when robot is not on table' do
         expect(robot.move).to eq(false)
+        expect(robot.errors).to include('Position is not on table.')
       end
 
-      it 'should ignore the move command when next position is invalid' do
+      it 'should append the move command error when next position is invalid' do
         robot.place(0, 0, 'SOUTH')
         robot.move
 
+        expect(robot.errors).not_to be_empty
         expect { robot.report }.to output(/0,0,SOUTH/).to_stdout
       end
     end
@@ -93,8 +97,9 @@ module ToyRobotSimulator
         expect { robot.report }.to output(/0,0,NORTH/).to_stdout
       end
 
-      it 'should ignore the left command when robot is not on table' do
+      it 'should append the left command error when robot is not on table' do
         expect(robot.left).to eq(false)
+        expect(robot.errors).to include('Position is not on table.')
       end
     end
 
@@ -127,8 +132,9 @@ module ToyRobotSimulator
         expect { robot.report }.to output(/0,0,NORTH/).to_stdout
       end
 
-      it 'should ignore the right command when robot is not on table' do
+      it 'should append the right command error when robot is not on table' do
         expect(robot.right).to eq(false)
+        expect(robot.errors).to include('Position is not on table.')
       end
     end
   end
