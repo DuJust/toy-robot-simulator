@@ -6,6 +6,8 @@ module ToyRobotSimulator
     SOUTH = 'SOUTH'
 
     def place(x, y, orientation)
+      return unless on_table?(x, y, orientation)
+
       @x           = x
       @y           = y
       @orientation = orientation
@@ -56,8 +58,11 @@ module ToyRobotSimulator
 
     private
 
-    def on_table?
-      @x && @y && @orientation
+    def on_table?(x = @x, y = @y, orientation = @orientation)
+      x && y && orientation &&
+        x >= 0 && x <= 5 &&
+        y >= 0 && y <= 5 &&
+        [NORTH, EAST, SOUTH, WEST].include?(orientation)
     end
   end
 end

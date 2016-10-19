@@ -12,6 +12,36 @@ module ToyRobotSimulator
         expect(robot.report).to eq('0,0,NORTH')
       end
 
+      it 'should not place robot when x position less than 0' do
+        robot.place(-1, 0, 'NORTH')
+
+        expect(robot.report).to eq(nil)
+      end
+
+      it 'should not place robot when x position more than 5' do
+        robot.place(6, 0, 'NORTH')
+
+        expect(robot.report).to eq(nil)
+      end
+
+      it 'should not place robot when y position less than 0' do
+        robot.place(0, -1, 'NORTH')
+
+        expect(robot.report).to eq(nil)
+      end
+
+      it 'should not place robot when y position more than 5' do
+        robot.place(0, 6, 'NORTH')
+
+        expect(robot.report).to eq(nil)
+      end
+
+      it 'should not place robot with invalid orientation' do
+        robot.place(0, 0, 'WHATEVER')
+
+        expect(robot.report).to eq(nil)
+      end
+
       it 'should ignore the report command when robot is not on table' do
         expect(robot.report).to eq(nil)
       end
