@@ -2,6 +2,7 @@ module ToyRobotSimulator
   class Robot
     NORTH = 'NORTH'
     WEST  = 'WEST'
+    EAST  = 'EAST'
 
     def place(x, y, orientation)
       @x           = x
@@ -19,6 +20,10 @@ module ToyRobotSimulator
 
     def left
       @orientation = WEST if @orientation == NORTH
+    end
+
+    def right
+      @orientation = EAST if @orientation == NORTH
     end
   end
 end
