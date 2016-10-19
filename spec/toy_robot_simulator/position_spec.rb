@@ -100,6 +100,24 @@ module ToyRobotSimulator
       end
     end
 
+    describe '#clone_with' do
+      it 'should assign specific value' do
+        cloned_position = position.clone_with(x: 5, y: 1)
+        expect(cloned_position.x).to eq(5)
+        expect(cloned_position.y).to eq(1)
+      end
+
+      it 'should not effect the origin position' do
+        position.clone_with(x: 5)
+        expect(position.x).to eq(0)
+      end
+
+      it 'should ignore invalid instance variable' do
+        cloned_position = position.clone_with(whaterver: 5)
+        expect(cloned_position.x).to eq(0)
+      end
+    end
+
     describe '#north?' do
       let(:orientation) { Position::NORTH }
 

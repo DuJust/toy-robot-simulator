@@ -6,7 +6,7 @@ module ToyRobotSimulator
     let(:command) { Command.new(robot) }
     let(:robot) { double(:robot) }
 
-    describe '#read_from_io' do
+    describe '#read_from_io', redirect_output: true do
       let(:io) { File.open('spec/fixtures/test1') }
 
       it 'should read io and run each command' do

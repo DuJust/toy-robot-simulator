@@ -16,13 +16,13 @@ module ToyRobotSimulator
 
       next_position = case
                         when @position.north?
-                          Position.new(@position.x, @position.y + 1, @position.orientation)
+                          @position.clone_with(y: @position.y + 1)
                         when @position.east?
-                          Position.new(@position.x + 1, @position.y, @position.orientation)
+                          @position.clone_with(x: @position.x + 1)
                         when @position.south?
-                          Position.new(@position.x, @position.y - 1, @position.orientation)
+                          @position.clone_with(y: @position.y - 1)
                         when @position.west?
-                          Position.new(@position.x - 1, @position.y, @position.orientation)
+                          @position.clone_with(x: @position.x - 1)
                       end
       @position     = next_position if next_position.on_table?
     end
