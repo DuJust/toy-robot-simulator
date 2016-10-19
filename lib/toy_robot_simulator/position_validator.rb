@@ -29,8 +29,8 @@ module ToyRobotSimulator
       unless @position.x
         @errors << 'Position X is empty.'
       else
-        @errors << "Position X #{@position.x} is less than 0." unless @position.x >= MIN_POSITION
-        @errors << "Position X #{@position.x} is more than 5." unless @position.x <= MAX_POSITION
+        @errors << "Position X:#{@position.x} should be equal or more than 0." unless @position.x >= MIN_POSITION
+        @errors << "Position X:#{@position.x} should be less than 5." unless @position.x < MAX_POSITION
       end
     end
 
@@ -38,8 +38,8 @@ module ToyRobotSimulator
       unless @position.y
         @errors << 'Position Y is empty.'
       else
-        @errors << "Position Y #{@position.y} is less than 0." unless @position.y >= MIN_POSITION
-        @errors << "Position Y #{@position.y} is more than 5." unless @position.y <= MAX_POSITION
+        @errors << "Position Y:#{@position.y} should be equal or more than 0." unless @position.y >= MIN_POSITION
+        @errors << "Position Y:#{@position.y} should be less than 5." unless @position.y < MAX_POSITION
       end
     end
 

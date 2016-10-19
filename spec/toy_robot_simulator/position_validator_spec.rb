@@ -31,17 +31,17 @@ module ToyRobotSimulator
           it { is_expected.to be_falsey }
           it 'should have position x less than error' do
             subject
-            expect(position_validator.errors).to include('Position X -1 is less than 0.')
+            expect(position_validator.errors).to include('Position X:-1 should be equal or more than 0.')
           end
         end
 
         context 'when more than 5' do
-          let(:x) { 6 }
+          let(:x) { 5 }
 
           it { is_expected.to be_falsey }
           it 'should have position x more than error' do
             subject
-            expect(position_validator.errors).to include('Position X 6 is more than 5.')
+            expect(position_validator.errors).to include('Position X:5 should be less than 5.')
           end
         end
       end
@@ -63,17 +63,17 @@ module ToyRobotSimulator
           it { is_expected.to be_falsey }
           it 'should have position y less than error' do
             subject
-            expect(position_validator.errors).to include('Position Y -1 is less than 0.')
+            expect(position_validator.errors).to include('Position Y:-1 should be equal or more than 0.')
           end
         end
 
         context 'when more than 5' do
-          let(:y) { 6 }
+          let(:y) { 5 }
 
           it { is_expected.to be_falsey }
           it 'should have position y more than error' do
             subject
-            expect(position_validator.errors).to include('Position Y 6 is more than 5.')
+            expect(position_validator.errors).to include('Position Y:5 should be less than 5.')
           end
         end
       end
