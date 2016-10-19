@@ -20,6 +20,27 @@ module ToyRobotSimulator
 
         expect(robot.report).to eq('0,1,NORTH')
       end
+
+      it 'should move forward west' do
+        robot.place(1, 0, 'WEST')
+        robot.move
+
+        expect(robot.report).to eq('0,0,WEST')
+      end
+
+      it 'should move forward east' do
+        robot.place(0, 0, 'EAST')
+        robot.move
+
+        expect(robot.report).to eq('1,0,EAST')
+      end
+
+      it 'should move forward south' do
+        robot.place(0, 1, 'SOUTH')
+        robot.move
+
+        expect(robot.report).to eq('0,0,SOUTH')
+      end
     end
 
     describe '#left' do
