@@ -5,7 +5,7 @@ module ToyRobotSimulator
     MIN_POSITION = 0
     MAX_POSITION = 5
 
-    attr_reader :x, :y, :orientation
+    attr_accessor :x, :y, :orientation
 
     def initialize(x, y, orientation)
       @x           = x

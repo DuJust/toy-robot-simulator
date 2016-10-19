@@ -8,30 +8,27 @@ module ToyRobotSimulator
     SOUTH = 'SOUTH'
 
     def place(x, y, orientation)
-      return unless on_table?(x, y, orientation)
-
-      @x           = x
-      @y           = y
-      @orientation = orientation
+      position  = Position.new(x, y, orientation)
+      @position = position if on_table?(position)
     end
 
     def report
-      [@x, @y, @orientation].join(',') if on_table?
+      [@position.x, @position.y, @position.orientation].join(',') if on_table?
     end
 
     def move
       return unless on_table?
 
-      @y += 1 if @orientation == NORTH
-      @y -= 1 if @orientation == SOUTH
-      @x += 1 if @orientation == EAST
-      @x -= 1 if @orientation == WEST
+      @position.y += 1 if @position.orientation == NORTH
+      @position.y -= 1 if @position.orientation == SOUTH
+      @position.x += 1 if @position.orientation == EAST
+      @position.x -= 1 if @position.orientation == WEST
     end
 
     def left
       return unless on_table?
 
-      @orientation = case @orientation
+      @position.orientation = case @position.orientation
                        when NORTH
                          WEST
                        when WEST
@@ -46,7 +43,7 @@ module ToyRobotSimulator
     def right
       return unless on_table?
 
-      @orientation = case @orientation
+      @position.orientation = case @position.orientation
                        when NORTH
                          EAST
                        when EAST
@@ -60,8 +57,8 @@ module ToyRobotSimulator
 
     private
 
-    def on_table?(x = @x, y = @y, orientation = @orientation)
-      Position.new(x, y, orientation).on_table?
+    def on_table?(position = @position)
+      position && position.on_table?
     end
   end
 end
