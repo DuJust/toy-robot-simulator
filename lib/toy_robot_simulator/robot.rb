@@ -2,11 +2,6 @@ require 'toy_robot_simulator/position'
 
 module ToyRobotSimulator
   class Robot
-    NORTH = 'NORTH'
-    WEST  = 'WEST'
-    EAST  = 'EAST'
-    SOUTH = 'SOUTH'
-
     def place(x, y, orientation)
       position  = Position.new(x, y, orientation)
       @position = position if on_table?(position)
@@ -35,31 +30,31 @@ module ToyRobotSimulator
     def left
       return unless on_table?
 
-      @position.orientation = case
-                                when @position.north?
-                                  WEST
-                                when @position.east?
-                                  NORTH
-                                when @position.south?
-                                  EAST
-                                when @position.west?
-                                  SOUTH
-                              end
+      case
+        when @position.north?
+          @position.turn_west
+        when @position.east?
+          @position.turn_north
+        when @position.south?
+          @position.turn_east
+        when @position.west?
+          @position.turn_south
+      end
     end
 
     def right
       return unless on_table?
 
-      @position.orientation = case
-                                when @position.north?
-                                  EAST
-                                when @position.east?
-                                  SOUTH
-                                when @position.south?
-                                  WEST
-                                when @position.west?
-                                  NORTH
-                              end
+      case
+        when @position.north?
+          @position.turn_east
+        when @position.east?
+          @position.turn_south
+        when @position.south?
+          @position.turn_west
+        when @position.west?
+          @position.turn_north
+      end
     end
 
     private

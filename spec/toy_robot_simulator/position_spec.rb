@@ -91,5 +91,41 @@ module ToyRobotSimulator
 
       it { is_expected.to eq(true) }
     end
+
+    describe '#turn_north' do
+      subject do
+        position.turn_north
+        position.north?
+      end
+
+      it { is_expected.to eq(true) }
+    end
+
+    describe '#turn_east' do
+      subject do
+        position.turn_east
+        position.east?
+      end
+
+      it { is_expected.to eq(true) }
+    end
+
+    describe '#turn_south' do
+      subject do
+        position.turn_south
+        position.south?
+      end
+
+      it { is_expected.to eq(true) }
+    end
+
+    describe '#turn_west' do
+      subject do
+        position.turn_west
+        position.west?
+      end
+
+      it { is_expected.to eq(true) }
+    end
   end
 end

@@ -7,6 +7,8 @@ module ToyRobotSimulator
     EAST  = 'EAST'
     SOUTH = 'SOUTH'
 
+    ORIENTATIONS = [NORTH, EAST, SOUTH, WEST]
+
     MIN_POSITION = 0
     MAX_POSITION = 5
 
@@ -22,17 +24,16 @@ module ToyRobotSimulator
       x && y && orientation &&
         x >= MIN_POSITION && x <= MAX_POSITION &&
         y >= MIN_POSITION && y <= MAX_POSITION &&
-        [
-          ToyRobotSimulator::Robot::NORTH,
-          ToyRobotSimulator::Robot::EAST,
-          ToyRobotSimulator::Robot::SOUTH,
-          ToyRobotSimulator::Robot::WEST
-        ].include?(orientation)
+        ORIENTATIONS.include?(orientation)
     end
 
-    [NORTH, EAST, SOUTH, WEST].each do |orientation|
+    ORIENTATIONS.each do |orientation|
       define_method "#{orientation.downcase}?" do
         @orientation == orientation
+      end
+
+      define_method "turn_#{orientation.downcase}" do
+        @orientation = orientation
       end
     end
   end
