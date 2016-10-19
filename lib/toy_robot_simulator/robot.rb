@@ -1,3 +1,5 @@
+require 'toy_robot_simulator/position'
+
 module ToyRobotSimulator
   class Robot
     NORTH = 'NORTH'
@@ -59,10 +61,7 @@ module ToyRobotSimulator
     private
 
     def on_table?(x = @x, y = @y, orientation = @orientation)
-      x && y && orientation &&
-        x >= 0 && x <= 5 &&
-        y >= 0 && y <= 5 &&
-        [NORTH, EAST, SOUTH, WEST].include?(orientation)
+      Position.new(x, y, orientation).on_table?
     end
   end
 end
