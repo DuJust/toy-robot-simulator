@@ -23,7 +23,16 @@ module ToyRobotSimulator
     end
 
     def left
-      @orientation = WEST if @orientation == NORTH
+      @orientation = case @orientation
+                       when NORTH
+                         WEST
+                       when WEST
+                         SOUTH
+                       when SOUTH
+                         EAST
+                       when EAST
+                         NORTH
+                     end
     end
 
     def right
