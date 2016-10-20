@@ -24,21 +24,11 @@ module ToyRobotSimulator
     private
 
     def validate_x
-      unless @position.x
-        @errors << 'Position X is empty.'
-      else
-        @errors << "Position X:#{@position.x} should be equal or more than 0." unless @position.x >= MIN_POSITION
-        @errors << "Position X:#{@position.x} should be less than 5." unless @position.x < MAX_POSITION
-      end
+      validate_coordinate('X', @position.x)
     end
 
     def validate_y
-      unless @position.y
-        @errors << 'Position Y is empty.'
-      else
-        @errors << "Position Y:#{@position.y} should be equal or more than 0." unless @position.y >= MIN_POSITION
-        @errors << "Position Y:#{@position.y} should be less than 5." unless @position.y < MAX_POSITION
-      end
+      validate_coordinate('Y', @position.y)
     end
 
     def validate_orientation
@@ -48,6 +38,15 @@ module ToyRobotSimulator
         unless Position::ORIENTATIONS.include?(@position.orientation)
           @errors << "Position orientation #{@position.orientation} is should be one of #{Position::ORIENTATIONS.join(',')}."
         end
+      end
+    end
+
+    def validate_coordinate(key, value)
+      unless value
+        @errors << "Position #{key} is empty."
+      else
+        @errors << "Position #{key}:#{value} should be equal or more than 0." unless value >= MIN_POSITION
+        @errors << "Position #{key}:#{value} should be less than 5." unless value < MAX_POSITION
       end
     end
   end
