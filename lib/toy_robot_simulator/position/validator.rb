@@ -1,5 +1,7 @@
+require 'toy_robot_simulator/position'
+
 module ToyRobotSimulator
-  class PositionValidator
+  class Position::Validator
     MIN_POSITION = 0
     MAX_POSITION = 5
 

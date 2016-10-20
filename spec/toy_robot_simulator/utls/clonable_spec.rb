@@ -1,7 +1,7 @@
 require 'spec_helper'
-require 'toy_robot_simulator/clonable'
+require 'toy_robot_simulator/utils/clonable'
 
-module ToyRobotSimulator
+module ToyRobotSimulator::Utils
   describe Clonable do
     let(:dummy_class) do
       Class.new do

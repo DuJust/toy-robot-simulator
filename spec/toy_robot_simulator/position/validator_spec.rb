@@ -1,16 +1,16 @@
 require 'spec_helper'
-require 'toy_robot_simulator/position_validator'
+require 'toy_robot_simulator/position/validator'
 
 module ToyRobotSimulator
-  describe PositionValidator do
-    let(:position_validator) { PositionValidator.new(position) }
+  describe Position::Validator do
+    let(:validator) { Position::Validator.new(position) }
     let(:position) { Position.new(x, y, orientation) }
     let(:x) { 0 }
     let(:y) { 0 }
     let(:orientation) { Position::NORTH }
 
     describe '#on_table?' do
-      subject { position_validator.valid? }
+      subject { validator.valid? }
 
       it { is_expected.to be_truthy }
 
@@ -21,7 +21,7 @@ module ToyRobotSimulator
           it { is_expected.to be_falsey }
           it 'should have position x empty error' do
             subject
-            expect(position_validator.errors).to include('Position X is empty.')
+            expect(validator.errors).to include('Position X is empty.')
           end
         end
 
@@ -31,7 +31,7 @@ module ToyRobotSimulator
           it { is_expected.to be_falsey }
           it 'should have position x less than error' do
             subject
-            expect(position_validator.errors).to include('Position X:-1 should be equal or more than 0.')
+            expect(validator.errors).to include('Position X:-1 should be equal or more than 0.')
           end
         end
 
@@ -41,7 +41,7 @@ module ToyRobotSimulator
           it { is_expected.to be_falsey }
           it 'should have position x more than error' do
             subject
-            expect(position_validator.errors).to include('Position X:5 should be less than 5.')
+            expect(validator.errors).to include('Position X:5 should be less than 5.')
           end
         end
       end
@@ -53,7 +53,7 @@ module ToyRobotSimulator
           it { is_expected.to be_falsey }
           it 'should have position y empty error' do
             subject
-            expect(position_validator.errors).to include('Position Y is empty.')
+            expect(validator.errors).to include('Position Y is empty.')
           end
         end
 
@@ -63,7 +63,7 @@ module ToyRobotSimulator
           it { is_expected.to be_falsey }
           it 'should have position y less than error' do
             subject
-            expect(position_validator.errors).to include('Position Y:-1 should be equal or more than 0.')
+            expect(validator.errors).to include('Position Y:-1 should be equal or more than 0.')
           end
         end
 
@@ -73,7 +73,7 @@ module ToyRobotSimulator
           it { is_expected.to be_falsey }
           it 'should have position y more than error' do
             subject
-            expect(position_validator.errors).to include('Position Y:5 should be less than 5.')
+            expect(validator.errors).to include('Position Y:5 should be less than 5.')
           end
         end
       end
@@ -85,7 +85,7 @@ module ToyRobotSimulator
           it { is_expected.to be_falsey }
           it 'should have position orientation empty error' do
             subject
-            expect(position_validator.errors).to include('Position orientation is empty.')
+            expect(validator.errors).to include('Position orientation is empty.')
           end
         end
 
@@ -95,7 +95,7 @@ module ToyRobotSimulator
           it { is_expected.to be_falsey }
           it 'should have position orientation invalid error' do
             subject
-            expect(position_validator.errors).to include("Position orientation WHATEVER is should be one of NORTH,EAST,SOUTH,WEST.")
+            expect(validator.errors).to include("Position orientation WHATEVER is should be one of NORTH,EAST,SOUTH,WEST.")
           end
         end
       end

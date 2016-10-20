@@ -12,12 +12,12 @@ module ToyRobotSimulator
       subject { position.on_table? }
 
       context 'when validator pass' do
-        before { allow_any_instance_of(PositionValidator).to receive(:valid?).and_return true }
+        before { allow_any_instance_of(Position::Validator).to receive(:valid?).and_return true }
         it { is_expected.to be_truthy }
       end
 
       context 'when validator failed' do
-        before { allow_any_instance_of(PositionValidator).to receive(:valid?).and_return false }
+        before { allow_any_instance_of(Position::Validator).to receive(:valid?).and_return false }
         it { is_expected.to be_falsey }
       end
     end

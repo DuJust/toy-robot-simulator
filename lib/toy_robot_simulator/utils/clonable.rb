@@ -1,4 +1,4 @@
-module ToyRobotSimulator
+module ToyRobotSimulator::Utils
   module Clonable
     def clone_with(**args)
       cloned = self.clone

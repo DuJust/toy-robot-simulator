@@ -1,6 +1,8 @@
+require 'toy_robot_simulator/utils/clonable'
+
 module ToyRobotSimulator
   class Position
-    include ToyRobotSimulator::Clonable
+    include ToyRobotSimulator::Utils::Clonable
 
     NORTH = 'NORTH'
     WEST  = 'WEST'
@@ -18,7 +20,7 @@ module ToyRobotSimulator
     end
 
     def on_table?
-      @validator = PositionValidator.new(self)
+      @validator = Position::Validator.new(self)
       @validator.valid?
     end
 
