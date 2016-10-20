@@ -3,10 +3,7 @@ module ToyRobotSimulator
     attr_reader :errors
 
     def place(x, y, orientation)
-      position = Position.new(x, y, orientation)
-      on_table(position) do
-        @position = position
-      end
+      update_position(x: x, y: y, orientation: orientation)
     end
 
     def report
@@ -17,17 +14,16 @@ module ToyRobotSimulator
 
     def move
       on_table do
-        next_position = case
-                          when @position.north?
-                            @position.clone_with(y: @position.y + 1)
-                          when @position.east?
-                            @position.clone_with(x: @position.x + 1)
-                          when @position.south?
-                            @position.clone_with(y: @position.y - 1)
-                          when @position.west?
-                            @position.clone_with(x: @position.x - 1)
-                        end
-        on_table(next_position) { @position = next_position }
+        case
+          when @position.north?
+            update_position(y: @position.y + 1)
+          when @position.east?
+            update_position(x: @position.x + 1)
+          when @position.south?
+            update_position(y: @position.y - 1)
+          when @position.west?
+            update_position(x: @position.x - 1)
+        end
       end
     end
 
@@ -35,13 +31,13 @@ module ToyRobotSimulator
       on_table do
         case
           when @position.north?
-            @position.turn_west
+            update_position(orientation: Position::WEST)
           when @position.east?
-            @position.turn_north
+            update_position(orientation: Position::NORTH)
           when @position.south?
-            @position.turn_east
+            update_position(orientation: Position::EAST)
           when @position.west?
-            @position.turn_south
+            update_position(orientation: Position::SOUTH)
         end
       end
     end
@@ -50,33 +46,46 @@ module ToyRobotSimulator
       on_table do
         case
           when @position.north?
-            @position.turn_east
+            update_position(orientation: Position::EAST)
           when @position.east?
-            @position.turn_south
+            update_position(orientation: Position::SOUTH)
           when @position.south?
-            @position.turn_west
+            update_position(orientation: Position::WEST)
           when @position.west?
-            @position.turn_north
+            update_position(orientation: Position::NORTH)
         end
       end
     end
 
     private
 
-    def on_table(position = @position)
+    def on_table
       @errors = []
-      unless position
-        @errors << 'Position is not on table.'
-        return false
-      end
 
-      if position.on_table?
+      if @position && @position.on_table?
         yield if block_given?
         true
       else
-        @errors += position.errors
+        @errors << 'Robot is not on table.'
         false
       end
+    end
+
+    def update_position(**args)
+      @errors       = []
+      next_position = create_or_clone_position(args)
+
+      if next_position.on_table?
+        @position = next_position
+        true
+      else
+        @errors += next_position.errors
+        false
+      end
+    end
+
+    def create_or_clone_position(args)
+      @position ? @position.clone_with(args) : Position.new(args[:x], args[:y], args[:orientation])
     end
   end
 end

@@ -21,7 +21,7 @@ module ToyRobotSimulator
 
       it 'should append the report command error when robot is not on table' do
         expect(robot.report).to eq(false)
-        expect(robot.errors).to include('Position is not on table.')
+        expect(robot.errors).to include('Robot is not on table.')
       end
     end
 
@@ -56,7 +56,7 @@ module ToyRobotSimulator
 
       it 'should append the move command error when robot is not on table' do
         expect(robot.move).to eq(false)
-        expect(robot.errors).to include('Position is not on table.')
+        expect(robot.errors).to include('Robot is not on table.')
       end
 
       it 'should append the move command error when next position is invalid' do
@@ -99,7 +99,7 @@ module ToyRobotSimulator
 
       it 'should append the left command error when robot is not on table' do
         expect(robot.left).to eq(false)
-        expect(robot.errors).to include('Position is not on table.')
+        expect(robot.errors).to include('Robot is not on table.')
       end
     end
 
@@ -134,7 +134,7 @@ module ToyRobotSimulator
 
       it 'should append the right command error when robot is not on table' do
         expect(robot.right).to eq(false)
-        expect(robot.errors).to include('Position is not on table.')
+        expect(robot.errors).to include('Robot is not on table.')
       end
     end
   end
