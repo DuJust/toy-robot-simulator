@@ -40,10 +40,6 @@ module ToyRobotSimulator
       define_method "#{orientation.downcase}?" do
         @orientation == orientation
       end
-
-      define_method "turn_#{orientation.downcase}" do
-        @orientation = orientation
-      end
     end
   end
 end
