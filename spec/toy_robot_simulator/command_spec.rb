@@ -8,7 +8,8 @@ RSpec.shared_examples "log robot errors" do |method, command_string|
   end
 
   it "uses the given parameter" do
-    expect { command.run(command_string) }.to output(/Command ignore because: there's an error/).to_stdout
+    expect { command.run(command_string) }.to output(/Line '#{command_string}' ignore because: there's an error/)
+                                                .to_stdout
   end
 end
 
