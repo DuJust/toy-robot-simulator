@@ -1,5 +1,9 @@
+require 'toy_robot_simulator/utils/integer_validator'
+
 module ToyRobotSimulator
   class Command
+    include ToyRobotSimulator::Utils::IntegerValidator
+
     def initialize(robot = Robot.new)
       @robot = robot
     end
@@ -29,14 +33,6 @@ module ToyRobotSimulator
 
     def log_errors(line)
       @robot.errors.each { |error| puts "Line \'#{line}\' ignore because: #{error}" }
-    end
-
-    def valid_integer?(integer_string)
-      Integer(integer_string)
-    rescue ArgumentError
-      false
-    else
-      true
     end
   end
 end
