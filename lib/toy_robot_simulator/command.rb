@@ -4,30 +4,42 @@ module ToyRobotSimulator
   class Command
     include ToyRobotSimulator::Utils::IntegerValidator
 
+    PLACE    = 'PLACE'
+    MOVE     = 'MOVE'
+    LEFT     = 'LEFT'
+    RIGHT    = 'RIGHT'
+    REPORT   = 'REPORT'
+    COMMANDS = [PLACE, MOVE, LEFT, RIGHT, REPORT]
+
     def initialize(robot = Robot.new)
       @robot = robot
     end
 
     def run(line)
-      log_errors(line) unless operate_robot(line)
+      operate_robot(line) do |command, args|
+        case command
+          when PLACE
+            x, y, orientation = args
+            @robot.place(x.to_i, y.to_i, orientation) if valid_integer?(x) && valid_integer?(y)
+          when MOVE
+            @robot.move
+          when LEFT
+            @robot.left
+          when RIGHT
+            @robot.right
+          when REPORT
+            @robot.report
+        end
+      end
     end
 
     private
 
     def operate_robot(line)
-      command = line.split
-      case command.first
-        when 'PLACE'
-          x, y, orientation = command.last.split(',')
-          @robot.place(x.to_i, y.to_i, orientation) if valid_integer?(x) && valid_integer?(y)
-        when 'MOVE'
-          @robot.move
-        when 'LEFT'
-          @robot.left
-        when 'RIGHT'
-          @robot.right
-        when 'REPORT'
-          @robot.report
+      words = line.split
+
+      if COMMANDS.include?(words.first) && block_given?
+        log_errors(line) unless yield words.first, words.last.split(',')
       end
     end
 
